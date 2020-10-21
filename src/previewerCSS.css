@@ -1,0 +1,45 @@
+/* The CSS used for styling the markdown preview */
+#preview code, pre {
+    background-color: rgb(254, 227, 203);
+    padding: 2px;
+}
+#preview pre>code {
+    padding: 0;
+}
+#preview pre {
+    margin-right: 1em;
+}
+/* Links */
+#preview a:link {
+    color: rgb(0, 175, 239);
+    text-decoration: none;
+}
+#preview a:visited {
+    color: rgb(0, 107, 179);
+}
+#preview a:hover, #preview a:active {
+    text-decoration: underline;
+}
+
+#preview blockquote {
+    margin-left: 1em;
+    border-left: 3px solid rgb(0, 175, 239);
+    padding-left: 6px;
+}
+
+/* Table */
+#preview table {
+    border-collapse: collapse;
+}
+#preview th, #preview td {
+    border: 2px solid #ddd;
+    padding: 4px;
+}
+#preview tr:nth-child(even){background-color: #f2f2f2;}
+#preview th {
+    padding-top: 6px;
+    padding-bottom: 6px;
+    text-align: left;
+    background-color: rgb(0, 175, 239);
+    color: white;
+}

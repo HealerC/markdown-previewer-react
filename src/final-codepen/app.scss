@@ -1,0 +1,209 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
+$editorColor: rgb(245, 134, 52);
+$previewerColor: rgb(0, 175, 239);
+$fontUsed: 'Open Sans', sans-serif;
+* {
+    box-sizing: border-box;
+}
+html, body, #app, #app>div, #root, .App, .App>div {
+	height: 100%;
+}
+header {
+    border: 2px solid gray;
+    border-radius: 2em;
+    width: max-content;     // So the header doesn't take the entire width;
+    margin: auto;
+    margin-bottom: 1em;
+    h1 {
+        margin: 0.1em;
+        color: white;
+        font: {
+            family: $fontUsed;
+            size: 1.5em;
+            weight: bold;
+        }
+        background-image: linear-gradient(to right, $editorColor, $previewerColor);
+        border-radius: inherit;
+        padding: 0.3em 0.6em;
+    }
+}
+#workspace {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;  
+    height: 80vh;
+    div {
+        flex-grow: 1;
+    }
+    #editorPane, #previewerPane {
+        /* Values common to both component */
+        position: relative;
+        margin: 0 0.5em 0.5em 0.5em;
+        height: 100%;
+        border-top-left-radius: 1em;
+        border-top-right-radius: 1em;
+        #titleBar {
+            position: absolute;
+            color: white;
+            top: 0;
+            right: 0;
+            padding: 0.3em 0.6em 0.3em 2em;
+            line-height: 0;
+            font-family: $fontUsed;
+            font-size: 0.7em;
+            font-weight: normal;
+            border-top-right-radius: 1em;
+            border-bottom-left-radius: 5em;
+            
+            h2 {
+                display: inline-block;
+            }
+            #actionButtons {
+                float: right;
+                margin-left: 1em;
+                margin-top: 3px;
+                .icon {
+                    margin: 2px;
+                    cursor: pointer;
+                    transition-property: opacity;
+                    transition-duration: 0.1s;
+                    transition-delay: 0;
+                }
+                .icon:hover {
+                    opacity: 0.7;
+                }
+            }
+        }
+    }
+    #editor {
+        /* Just the editor */
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        resize: none;
+        padding-top: 3em;               // To cover up for the toolbar space
+        padding-left: 1em;
+        border-top-right-radius: 1em;
+        border-top-left-radius: 1em;
+        border: none;
+        font-size: 1.1em;
+    }
+    #editor:focus {
+        outline: none;            // So it does not show its default outline on focus
+    }
+    #preview {
+        /* Just the preview (Pardon here - There could be more than one element with the 
+        id of preview. I just wanted to follow fcc's user's stories and leave things as they
+        are.)*/
+        padding-top: 3em;               // To account for the toolbar space
+        padding-left: 1em;
+        height: 100%;
+        overflow: auto;
+    }
+    #previewerPane {
+        // The box shadow and title bar color here is constant
+        box-shadow: 0 4px 8px 0 rgba(0, 175, 239, 0.2), 0 6px 20px 0 rgba(0, 175, 239, 0.19);
+        #titleBar {
+            background-color: $previewerColor;
+        }
+    }
+}
+#credits {
+    font-family: "Open Sans", sans-serif;
+    position: fixed;
+    bottom: 0.5em;
+    right: 0.5em;
+    font-size: 1em;
+    font-weight: bold;
+    a {
+        color: black;
+        font-weight: normal;
+        transition-property: color, letter-spacing;
+        transition-duration: 0.5s, 0.5s;
+        transition-delay: 0s, 0s;
+    }
+    a:nth-child(1) {
+        margin-left: 1em;
+    }
+    a:link, a:visited {
+        text-decoration: none;
+    }
+    a:hover, a:active {
+        letter-spacing: 2px;
+    }
+    #marked:hover, #marked:active {
+        color: $editorColor;
+    }
+    #me:hover, #me:active {
+        color: $previewerColor;
+    }
+}
+@media screen and (max-width: 360px) {
+    /*
+     *  On smaller screens, if was observed that the action buttons move to the next row
+     *  because of the space occupied by the header so the font size of the entire title bar
+     *  and the general spacing was reduced in order for it to still remain in a row.
+     */
+    #workspace {
+        #editorPane, #previewerPane {
+            #titleBar {
+                padding: 0.3em 0.3em 0.3em 1em;
+                font-size: 0.5em;
+                #actionButtons {
+                    margin-left: 0;
+                }
+            }
+        }
+    }
+}
+
+
+/* The CSS styles used for styling the markdown preview */
+#preview code, pre {
+    background-color: rgb(254, 227, 203);
+    padding: 2px;
+}
+#preview pre>code {
+    padding: 0;
+}
+#preview pre {
+    margin-right: 1em;
+}
+/* Links */
+#preview a:link {
+    color: rgb(0, 175, 239);
+    text-decoration: none;
+}
+#preview a:visited {
+    color: rgb(0, 107, 179);
+}
+#preview a:hover, #preview a:active {
+    text-decoration: underline;
+}
+
+#preview blockquote {
+    margin-left: 1em;
+    border-left: 3px solid rgb(0, 175, 239);
+    padding-left: 6px;
+}
+
+/* Table */
+#preview table {
+    border-collapse: collapse;
+}
+#preview th, #preview td {
+    border: 2px solid #ddd;
+    padding: 4px;
+}
+#preview tr:nth-child(even){background-color: #f2f2f2;}
+#preview th {
+    padding-top: 6px;
+    padding-bottom: 6px;
+    text-align: left;
+    background-color: rgb(0, 175, 239);
+    color: white;
+}
+#preview img {
+  max-width: 100%;
+  height: auto;
+}
